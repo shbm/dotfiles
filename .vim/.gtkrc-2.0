@@ -1,0 +1,13 @@
+style "vimfix" {
+    bg[NORMAL]="#272935" #suitable for base-railscast color
+}
+
+widget "vim-main-window.*GtkForm" style "vimfix"
+
+style "no-resize-handle"
+{
+    GtkWindow::resize-grip-height=0
+    GtkWindow::resize-grip-width=0
+}
+
+class "GtkWidget" style "no-resize-handle"
