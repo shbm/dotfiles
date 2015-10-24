@@ -13,4 +13,4 @@ commit_message = raw_input("Enter the commit message\n")
 commit_command = "git commit -m \"" + commit_message +"\"";
 print commit_command
 subprocess.call(["git", "commit", "-m", commit_message]);
-subprocess.call(["git", "push", "heroku", "master"]);
+subprocess.call(["git", "push", "origin", "master"]);

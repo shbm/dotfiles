@@ -103,6 +103,7 @@ inoremap vv <Esc>v
 inoremap <S-Left> <Esc>vh
 inoremap <S-Right> <Esc>lvl
 
+let mapleader=","
 "j and k are really the next down and up line for long lines
 nmap j gj
 nmap k gk
@@ -112,7 +113,7 @@ nmap <C-v> :vertical resize +5<CR>
 nmap <C-c> :vertical resize -5<CR>
 
 "\er to reminders.txt & \ev for .vimrc
-nmap <silent> <Leader>ev :e $MYVIMRC<CR>
+nmap <silent> <Leader>ev :e :MYVIMRC<CR>
 nmap <Leader>er :e /home/shbm/reminders.txt<CR>
 
 au FileType go nmap <leader>r <Plug>(go-run)
@@ -125,13 +126,9 @@ au FileType go nmap <leader>c <Plug>(go-coverage)
 inoremap <C-w> <Esc><C-w>
 
 "Multiple tab options
-"\p for 'p'revious tab
 nmap <Leader>p :tabp<CR>
-"\n for 'n'ext tab
 nmap <Leader>n :tabn<CR>
-"\o for 'o'pen newtab
 nmap <Leader>o :tabnew<CR>
-"\q for 'q'uiting tab
 nmap <Leader>q :q<CR>
 
 "Easy saving of buffers
