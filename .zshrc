@@ -90,8 +90,9 @@ alias gcommit='git commit -m'
 alias encrypt='gpg --encrypt --sign --armor -r shbm09@gmail.com'
 alias herokupush='python ~/dotfiles/scripts/herokupush.py'
 alias githubpush='python ~/dotfiles/scripts/githubpush.py'
+alias runc='python ~/dotfiles/scripts/runc.py'
+alias runcpp='python ~/dotfiles/scripts/runcpp.py'
 alias pythonserver='python -m SimpleHTTPServer'
-alias runc='python ~/dotfiles/scripts/easygcc.py'
 
 export GPGKEY=4BCB7C4B
 

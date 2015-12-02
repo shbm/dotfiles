@@ -15,7 +15,7 @@ set cursorline  "hightlight current line
 set gcr=n:blinkon0  "no blinking cursor in normal mode
 filetype off
 set go-=T  "hide Toolbar
-set go+=m  "hide Menu Bar
+set go-=m  "hide Menu Bar
 set go-=r  "hide right scroll bar
 set ruler
 set showmatch
@@ -47,10 +47,22 @@ call vundle#begin()
 """""""""""""""""""""""""""""""""""""""""""""'
 
 " let Vundle manage Vundle, required
+
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'fatih/vim-go'
+Plugin 'Raimondi/delimitMate'
+Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-surround'
+Plugin 'elzr/vim-json'
+Plugin 'pangloss/vim-javascript'
+Plugin 'digitaltoad/vim-jade'
+Plugin 'fugitive.vim'
+Plugin 'bling/vim-airline'
+Plugin 'ervandew/supertab'
 
 call vundle#end()            " required
 
@@ -65,6 +77,9 @@ let g:UltiSnipsJumpBackwardTrigger="<c-h>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
+"golang configurations
+au FileType go nmap <leader>r <Plug>(go-run)
 
 "Font setting
 let g:airline_powerline_fonts = 1
@@ -93,12 +108,6 @@ set statusline+=%*
 
 "custom keymapings
 
-"ii to NORMAL from INSERT mode
-inoremap ii <Esc>
-
-"vv to VISUAL mode from INSERT mode
-inoremap vv <Esc>v
-
 "Shift-<Arrow> for VISUAL selection
 inoremap <S-Left> <Esc>vh
 inoremap <S-Right> <Esc>lvl
@@ -113,14 +122,8 @@ nmap <C-v> :vertical resize +5<CR>
 nmap <C-c> :vertical resize -5<CR>
 
 "\er to reminders.txt & \ev for .vimrc
-nmap <silent> <Leader>ev :e :MYVIMRC<CR>
-nmap <Leader>er :e /home/shbm/reminders.txt<CR>
-
-au FileType go nmap <leader>r <Plug>(go-run)
-au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>t <Plug>(go-test)
-au FileType go nmap <leader>c <Plug>(go-coverage)
-
+nmap <silent> <Leader>ev :e /home/shbm/.vimrc<CR>
+nmap <Leader>er :e /home/shbm/Documents/reminders.txt<CR>
 
 "C-w in INSERT mode
 inoremap <C-w> <Esc><C-w>
@@ -177,26 +180,38 @@ autocmd BufReadPost *
   \ if line("'\"") > 0 && line("'\"") <= line("$") |
   \     exe "normal g`\"" |
   \ endif
+colorscheme xoria256
 
 "Maximize gvim window
 if has("gui_running")
     set lines=999 columns=999
-    colorscheme base16-railscasts
-else
-    colorscheme xoria256
+    set background=light
+    colorscheme base16-solarized
 endif
 
+"function! HighlightOverLength()
+    "highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+    "match OverLength /\%81v.\+/
+    "highlight trail ctermbg=red ctermfg=white guibg=#592929
+"endfunction
+
+"command HighlightOverLength call HighlightOverLength()
+
+"nnoremap <Leader>h :HighlightOverLength<CR>
 
 "80 Colomn length
-function! HighlightOverLength()
-    highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-    match OverLength /\%81v.\+/
-    highlight trail ctermbg=red ctermfg=white guibg=#592929
-endfunction
+"function! HighlightOverLength()
+    "highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+    "match OverLength /\%81v.\+/
+    "highlight trail ctermbg=red ctermfg=white guibg=#592929
+"endfunction
 
-command HighlightOverLength call HighlightOverLength()
+"command HighlightOverLength call HighlightOverLength()
 
-nnoremap <Leader>h :HighlightOverLength<CR>
+"nnoremap <Leader>h :HighlightOverLength<CR>
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
+
 
 "Highlight all instances of word under cursor, when idle.
 "Useful when studying strange source code.
