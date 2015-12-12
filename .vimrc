@@ -80,6 +80,8 @@ let g:UltiSnipsEditSplit="vertical"
 
 "golang configurations
 au FileType go nmap <leader>r <Plug>(go-run)
+au FileType c nmap <leader>r :!gcc % && ./a.out<CR>
+au FileType c nmap <leader>r :!g++ % && ./a.out<CR>
 
 "Font setting
 let g:airline_powerline_fonts = 1
@@ -98,8 +100,8 @@ let g:NERDTreeWinSize = 25
 
 "Syntastic shit
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
 let @/ = ''
 let g:syntastic_check_on_wq = 0
 set statusline+=%#warningmsg#
