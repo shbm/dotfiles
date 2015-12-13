@@ -93,6 +93,7 @@ alias githubpush='python ~/dotfiles/scripts/githubpush.py'
 alias runc='python ~/dotfiles/scripts/runc.py'
 alias runcpp='python ~/dotfiles/scripts/runcpp.py'
 alias pythonserver='python -m SimpleHTTPServer'
+alias vir='vi ./Documents/reminders.txt'
 
 export GPGKEY=4BCB7C4B
 

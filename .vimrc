@@ -62,6 +62,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'fugitive.vim'
 Plugin 'bling/vim-airline'
+Plugin 'junegunn/seoul256.vim'
 Plugin 'ervandew/supertab'
 
 call vundle#end()            " required
@@ -87,13 +88,9 @@ au FileType c nmap <leader>r :!g++ % && ./a.out<CR>
 let g:airline_powerline_fonts = 1
 set guifont =Monaco\ for\ Powerline\ for\ Powerline\ 11
 
-"Colorscheme settings
-set t_Co=256
 
 let g:vim_json_syntax_conceal = 0
 
-"Colorscheme setting
-set bg=dark
 
 "set the default colomn size of NERDTree window
 let g:NERDTreeWinSize = 25
@@ -182,35 +179,17 @@ autocmd BufReadPost *
   \ if line("'\"") > 0 && line("'\"") <= line("$") |
   \     exe "normal g`\"" |
   \ endif
-colorscheme xoria256
 
-"Maximize gvim window
 if has("gui_running")
     set lines=999 columns=999
-    set background=light
-    colorscheme base16-solarized
+    set bg=light
+    colorscheme solarized
+else
+    colorscheme seoul256
+    let g:seoul256_background = 239
+    set bg=dark
 endif
 
-"function! HighlightOverLength()
-    "highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-    "match OverLength /\%81v.\+/
-    "highlight trail ctermbg=red ctermfg=white guibg=#592929
-"endfunction
-
-"command HighlightOverLength call HighlightOverLength()
-
-"nnoremap <Leader>h :HighlightOverLength<CR>
-
-"80 Colomn length
-"function! HighlightOverLength()
-    "highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-    "match OverLength /\%81v.\+/
-    "highlight trail ctermbg=red ctermfg=white guibg=#592929
-"endfunction
-
-"command HighlightOverLength call HighlightOverLength()
-
-"nnoremap <Leader>h :HighlightOverLength<CR>
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
 
