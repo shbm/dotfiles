@@ -21,13 +21,15 @@ set ruler
 set showmatch
 set undofile
 set undodir=$HOME/.vim/undo
+set backupdir=./.backup,.,/tmp
+set directory=.,./.backup,/tmp
 set go-=L  "hide left scroll bar
 set wildmenu  "bash style command support
 set autowrite   "save buffer automatically
 set clipboard=unnamed
-set linespace=6
+set linespace=7
 set laststatus=2
-set relativenumber
+"set relativenumber
 set number
 set bg=dark
 set encoding=utf-8
@@ -48,6 +50,7 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 
+Plugin 'SirVer/ultisnips'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'honza/vim-snippets'
@@ -64,14 +67,17 @@ Plugin 'fugitive.vim'
 Plugin 'bling/vim-airline'
 Plugin 'junegunn/seoul256.vim'
 Plugin 'ervandew/supertab'
+Plugin 'matze/vim-move'
 
 call vundle#end()            " required
 
 "VUNDLE END
 filetype plugin indent on    " required
 
+set dictionary+=/usr/share/dict/words
 
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+" Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<c-k>"
 let g:UltiSnipsJumpForwardTrigger="<c-l>"
 let g:UltiSnipsJumpBackwardTrigger="<c-h>"
@@ -79,17 +85,25 @@ let g:UltiSnipsJumpBackwardTrigger="<c-h>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-"golang configurations
+" Automatic compilation and execution
 au FileType go nmap <leader>r <Plug>(go-run)
-au FileType c nmap <leader>r :!gcc % && ./a.out<CR>
-au FileType c nmap <leader>r :!g++ % && ./a.out<CR>
+au FileType python nmap <leader>r :!python %<CR>
+au FileType c nmap <leader>r :!gcc % && ./a.out && rm a.out<CR>
+au FileType cpp nmap <leader>r :!g++ % && ./a.out && rm a.out<CR>
+au FileType javascript nmap <leader>r :!node %<CR>
 
 "Font setting
 let g:airline_powerline_fonts = 1
-set guifont =Monaco\ for\ Powerline\ for\ Powerline\ 11
+set guifont=Monaco\ for\ Powerline\ for\ Powerline\ 9
 
+let file_name = expand('%:t:r')
+let extension = expand('%:e')
+
+" goyo settings
+let g:goyo_width = 60
 
 let g:vim_json_syntax_conceal = 0
+let g:move_key_modifier = 'C'
 
 
 "set the default colomn size of NERDTree window
@@ -97,6 +111,7 @@ let g:NERDTreeWinSize = 25
 
 "Syntastic shit
 let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_error_symbol = "✗"
 "let g:syntastic_auto_loc_list = 1
 "let g:syntastic_check_on_open = 1
 let @/ = ''
@@ -120,18 +135,16 @@ nmap k gk
 nmap <C-v> :vertical resize +5<CR>
 nmap <C-c> :vertical resize -5<CR>
 
-"\er to reminders.txt & \ev for .vimrc
+"Custom Mapping for file shortcuts
 nmap <silent> <Leader>ev :e /home/shbm/.vimrc<CR>
-nmap <Leader>er :e /home/shbm/Documents/reminders.txt<CR>
+nmap <Leader>er :e /home/shbm/Dropbox/Documents/reminders.txt<CR>
+nmap <Leader>ll :e /home/shbm/Dropbox/Documents/life_lessons_and_hacks.txt<CR>
 
 "C-w in INSERT mode
 inoremap <C-w> <Esc><C-w>
 
 "Multiple tab options
-nmap <Leader>p :tabp<CR>
-nmap <Leader>n :tabn<CR>
-nmap <Leader>o :tabnew<CR>
-nmap <Leader>q :q<CR>
+nmap <Leader>n :tabnew<CR>
 
 "Easy saving of buffers
 nmap <C-s> :w<CR>
@@ -160,17 +173,7 @@ set pastetoggle=<F10>
 inoremap <C-v> <F10><C-r>+<F10>
 vnoremap <C-c> "+y
 
-"shift whole lines like in Atom
-"bug#01: starts deleting line when reaches top
-"bug#02: when at last line moves two lines up
-imap <C-Up> <Esc>ddkPi
-imap <C-Down> <Esc>ddpi
-nmap <C-Up> ddkP
-nmap <C-Down> ddp
-
 noremap <F5> <Esc>:source $MYVIMRC<CR>
-
-
 
 "Custom functions
 
@@ -185,14 +188,13 @@ if has("gui_running")
     set bg=light
     colorscheme solarized
 else
-    colorscheme seoul256
+    colorscheme seoul256-light
     let g:seoul256_background = 239
     set bg=dark
 endif
 
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
-
+match OverLength /\%81v\+/
 
 "Highlight all instances of word under cursor, when idle.
 "Useful when studying strange source code.
